@@ -19,31 +19,58 @@ cargo build --release
 cargo build
 ```
 
+## Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/m-jingu/csvparser.git
+cd csvparser
+
+# Build the project
+cargo build --release
+
+# The binary will be available at ./target/release/csvparser
+```
+
+### Adding to PATH (Optional)
+
+To use `csvparser` from anywhere in your terminal, add it to your PATH:
+
+#### Linux/macOS
+```bash
+# Add to your shell profile (e.g., ~/.bashrc, ~/.zshrc)
+echo 'export PATH="$PATH:/path/to/csvparser/target/release"' >> ~/.bashrc
+source ~/.bashrc
+
+# Or create a symlink to a directory in your PATH
+sudo ln -s /path/to/csvparser/target/release/csvparser /usr/local/bin/csvparser
+```
+
 ## Usage
 
 ### Basic Usage
 
 ```bash
 # Read CSV from stdin and output to stdout
-./target/release/csvparser
+csvparser
 
 # Specify input and output files
-./target/release/csvparser input.csv -o output.csv
+csvparser input.csv -o output.csv
 
 # Extract specific columns (1-based indexing)
-./target/release/csvparser input.csv -f 1,3,5
+csvparser input.csv -f 1,3,5
 
 # Adjust buffer size (default: 64KB)
-./target/release/csvparser input.csv --buffer-size 1048576
+csvparser input.csv --buffer-size 1048576
 
 # Specify number of threads
-./target/release/csvparser input.csv --threads 4
+csvparser input.csv --threads 4
 
 # Show processing statistics
-./target/release/csvparser input.csv --stats
+csvparser input.csv --stats
 
 # Enable verbose logging
-./target/release/csvparser input.csv --verbose
+csvparser input.csv --verbose
 ```
 
 ### Performance Optimization
@@ -51,19 +78,19 @@ cargo build
 #### For Large Files (10GB+)
 ```bash
 # Use larger buffer size
-./target/release/csvparser large_file.csv --buffer-size 16777216  # 16MB
+csvparser large_file.csv --buffer-size 16777216  # 16MB
 
 # Utilize CPU cores
-./target/release/csvparser large_file.csv --threads 8
+csvparser large_file.csv --threads 8
 
 # Monitor performance with statistics
-./target/release/csvparser large_file.csv --stats --verbose
+csvparser large_file.csv --stats --verbose
 ```
 
 #### For Memory-Constrained Systems
 ```bash
 # Use smaller buffer size
-./target/release/csvparser input.csv --buffer-size 32768  # 32KB
+csvparser input.csv --buffer-size 32768  # 32KB
 ```
 
 ## Performance Characteristics
@@ -109,20 +136,20 @@ cargo build
 ### Memory Insufficient Error
 ```bash
 # Reduce buffer size
-./target/release/csvparser input.csv --buffer-size 16384
+csvparser input.csv --buffer-size 16384
 ```
 
 ### Slow Processing
 ```bash
 # Increase number of threads
-./target/release/csvparser input.csv --threads 8
+csvparser input.csv --threads 8
 
 # Increase buffer size
-./target/release/csvparser input.csv --buffer-size 16777216
+csvparser input.csv --buffer-size 16777216
 ```
 
 ### Debug Information Needed
 ```bash
 # Enable detailed logging
-RUST_LOG=debug ./target/release/csvparser input.csv --verbose
+RUST_LOG=debug csvparser input.csv --verbose
 ```
